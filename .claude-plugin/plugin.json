@@ -1,0 +1,17 @@
+{
+  "name": "dev-insights",
+  "version": "0.1.0",
+  "description": "Local-only Claude Code analytics: work rhythm, daily hours, tool/code activity, git commits, token spend, and heuristic growth insights.",
+  "author": {
+    "name": "Marius Silenskis"
+  },
+  "homepage": "https://github.com/MariusSilenskis/dev-insights-plugin",
+  "license": "MIT",
+  "keywords": [
+    "analytics",
+    "productivity",
+    "developer-insights",
+    "self-review",
+    "claude-code"
+  ]
+}
