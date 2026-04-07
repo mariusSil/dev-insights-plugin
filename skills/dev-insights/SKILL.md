@@ -36,13 +36,18 @@ python3 <skill-dir>/scripts/analyze.py [OPTIONS]
 
 ### Default invocation (most common)
 
-For a 7-day report on the current repo:
+ALWAYS save the report to a persistent file in `~/dev-insights-reports/` named with the date and window so the user can keep it. Do not write to `/tmp` and do not skip the file.
 
 ```bash
-python3 <skill-dir>/scripts/analyze.py --days 7 --output /tmp/dev-insights.md
+mkdir -p ~/dev-insights-reports && \
+python3 <skill-dir>/scripts/analyze.py --days 7 \
+  --output ~/dev-insights-reports/dev-insights-$(date +%Y-%m-%d)-7d.md
 ```
 
-Then read `/tmp/dev-insights.md` and present the report inline to the user.
+After generating, ALWAYS:
+1. Tell the user the **full absolute path** of the saved file in the first sentence of the response
+2. Read the file and present a concise inline summary (highlights only — do not dump the whole report)
+3. Mention they can `open` the file to see the full report
 
 ### Useful variations
 
@@ -60,9 +65,10 @@ Then read `/tmp/dev-insights.md` and present the report inline to the user.
 ### Recommended workflow
 
 1. Ask the user (only if ambiguous) about lookback window and whether they want it scoped to one project
-2. Run the script with `--output /tmp/dev-insights.md` so the file persists
+2. Run the script with `--output ~/dev-insights-reports/dev-insights-<DATE>-<WINDOW>.md` so the file persists in a stable location
 3. Read the file with the Read tool
-4. Present a concise summary inline highlighting:
+4. Lead the response with the absolute file path of the saved report
+5. Present a concise summary inline highlighting:
    - Top-line numbers (prompts, sessions, commits, tokens)
    - The 2–3 most actionable heuristic insights
    - Anything genuinely surprising in the hot-files or workflow-shape sections
